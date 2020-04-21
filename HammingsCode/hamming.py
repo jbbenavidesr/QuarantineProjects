@@ -1,14 +1,10 @@
-p = [0.8, 0.2]
+p = [0.81, 0.09, 0.09, 0.01]
 
-def combined(N, probabilities):
-    combined = []
-    for i in range(N):
-        for j in range(N):
-            combined.append(probabilities[i]*probabilities[j])
-    return combined
 
 def hamming(probabilities):
-    return ['1','0']
+    probabilities.sort(reverse=True)
+    order= [str(i) for i in range(len(probabilities))]
 
-print(combined(2, p))
-# print(hamming(p))
+    return list(zip(probabilities, order))
+
+print(hamming(p))
