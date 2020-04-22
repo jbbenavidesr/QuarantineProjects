@@ -1,12 +1,10 @@
 import itertools
 import math as m
 
-p = [0.8,0.2]
-p1 = [0.81, 0.09, 0.09, 0.01]
-p2 = [0.64, 0.16, 0.16, 0.04]
-p3 = [0.45, 0.35, 0.1, 0.05, 0.05]
-
 def entropy(probabilities):
+    """
+    Returns the entropy of a system, given the probabilities of each possible state.
+    """
     S=0
     for p in probabilities:
         I = -m.log2(p)
@@ -86,4 +84,16 @@ def hamming(probabilities):
             
     return tuple(zip(probabilities, hamming))
 
-print(hamming(list(group_probabilities(p, 2))), entropy(p))
+def average_length(probabilities, N=1):
+    """
+    Gets the average length of the messages using the Hamming Code
+    """
+    code = hamming(list(probabilities))
+    L = 0
+
+    for p, c in code:
+        L += p * len(c)
+
+    return L/N
+
+
