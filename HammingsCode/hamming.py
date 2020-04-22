@@ -1,6 +1,25 @@
+import itertools
+
+p = [0.8,0.2]
 p1 = [0.81, 0.09, 0.09, 0.01]
 p2 = [0.64, 0.16, 0.16, 0.04]
 p3 = [0.45, 0.35, 0.1, 0.05, 0.05]
+
+def group_probabilities(prob, N):
+    """
+    Return the probabilities of the different combinations that result from sending 
+    the messages in groups of N.
+    """
+    comb = itertools.product(prob, repeat=N)
+    g_prob = []
+
+    for i in comb:
+        product = 1
+        for j in i:
+            product *= j 
+        g_prob.append(product)
+
+    return g_prob    
 
 def get_history(probabilities):
     """ 
@@ -59,4 +78,4 @@ def hamming(probabilities):
             
     return tuple(zip(probabilities, hamming))
 
-print(hamming(p3))
+print(hamming(group_probabilities(p, 2)))
