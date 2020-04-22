@@ -3,6 +3,11 @@ p2 = [0.64, 0.16, 0.16, 0.04]
 p3 = [0.45, 0.35, 0.1, 0.05, 0.05]
 
 def get_history(probabilities):
+    """ 
+    Returns tuple with a history of the position occupied by a given probability
+    in the process of adding the last 2 and reducing the list to only 2 
+    possibilities
+    """
 
     history = [str(i) for i in range(len(probabilities))]
     last = probabilities[-1] + probabilities[-2]
@@ -30,10 +35,15 @@ def get_history(probabilities):
         last = values[-1] + values[-2]
         values = [values[i] for i in range(len(values)-2)] + [last]
     
-    return history
+    return tuple(history)
 
 
 def hamming(probabilities):
+    """ 
+    Returns the Hamming code given a list with the probabilities of some given inputs
+    to be sent.
+    """
+
     probabilities.sort(reverse=True)
     history = get_history(probabilities)
 
@@ -47,6 +57,6 @@ def hamming(probabilities):
                 hamming[j] += '1'
 
             
-    return list(zip(probabilities, hamming))
+    return tuple(zip(probabilities, hamming))
 
 print(hamming(p3))
