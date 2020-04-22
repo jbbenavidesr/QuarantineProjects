@@ -36,7 +36,17 @@ def get_history(probabilities):
 def hamming(probabilities):
     probabilities.sort(reverse=True)
     history = get_history(probabilities)
-            
-    return list(zip(probabilities, history))
 
-print(hamming(p1))
+    hamming = ['' for h in history]
+
+    for j in range(len(history)):
+        for i in range(len(history[0])):
+            if history[j][-(i+1)] == str(i):
+                hamming[j] += '0'
+            elif history[j][-(i+1)] == str(i+1):
+                hamming[j] += '1'
+
+            
+    return list(zip(probabilities, hamming))
+
+print(hamming(p3))
