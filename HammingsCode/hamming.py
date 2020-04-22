@@ -1,9 +1,17 @@
 import itertools
+import math as m
 
 p = [0.8,0.2]
 p1 = [0.81, 0.09, 0.09, 0.01]
 p2 = [0.64, 0.16, 0.16, 0.04]
 p3 = [0.45, 0.35, 0.1, 0.05, 0.05]
+
+def entropy(probabilities):
+    S=0
+    for p in probabilities:
+        I = -m.log2(p)
+        S += p*I
+    return S
 
 def group_probabilities(prob, N):
     """
@@ -19,7 +27,7 @@ def group_probabilities(prob, N):
             product *= j 
         g_prob.append(product)
 
-    return g_prob    
+    return tuple(g_prob)    
 
 def get_history(probabilities):
     """ 
@@ -78,4 +86,4 @@ def hamming(probabilities):
             
     return tuple(zip(probabilities, hamming))
 
-print(hamming(group_probabilities(p, 2)))
+print(hamming(list(group_probabilities(p, 2))), entropy(p))
