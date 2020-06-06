@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import hamming as ham
 
-Nmax= 20
+Nmax= 5
 p = [0.8, 0.2]
 
 data=[]

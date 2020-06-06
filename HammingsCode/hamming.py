@@ -94,6 +94,9 @@ def average_length(probabilities, N=1):
     for p, c in code:
         L += p * len(c)
 
-    return L/N
+    return L
 
+p = [0.8,0.2]
 
+if __name__ == '__main__':
+    print(sorted(list(group_probabilities(p,3)), reverse=True))
